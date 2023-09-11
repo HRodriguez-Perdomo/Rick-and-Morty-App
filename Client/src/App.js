@@ -39,11 +39,14 @@ function App() {
       setCharacters(updatedCharacters)
    }
 
-   const logIn = (userData)=> {
-      if(userData.password === PASSWORD && userData.email === EMAIL){
-         setAcces(true)
-         navigate('/home')
-      }
+   const login =(userData)=> {
+      const { email, password } = userData;
+      const URL = 'http://localhost:3001/rickandmorty/login/';
+      axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+         const { access } = data;
+         setAcces(data);
+         access && navigate('/home');
+      });
    }
    useEffect(() => {
       !access && navigate('/');
@@ -59,7 +62,7 @@ function App() {
          }
         
          <Routes>
-            <Route path='/' element={<Form logIn={logIn}/>}/>
+            <Route path='/' element={<Form logIn={login}/>}/>
            
             <Route path='/home' 
             element={<Cards characters={characters} onClose={onClose}/>}/>
