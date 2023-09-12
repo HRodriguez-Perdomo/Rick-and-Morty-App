@@ -1,5 +1,4 @@
 const users = require('../utils/users');
-const user = require ('../utils/users')
 
 
 const login = (req, res) =>{
@@ -8,8 +7,6 @@ const login = (req, res) =>{
     if(userFound) return res.status(200).json({access: true})
     return res.status(404).json({access :false})
 }
-
-
 
 
 
