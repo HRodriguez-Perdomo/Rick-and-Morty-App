@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useEffect } from "react"
 
 // ? importing css class
-import styles from './Detail.module.css'
+import style from './Detail.module.css'
 
 function Detail (){
     const {id} = useParams()
@@ -22,9 +22,9 @@ function Detail (){
         return setCharacter({})
     }, [id])
     return(
-        <div className={styles.mainDetailContainer}>
-            <div className={styles.mainImageContainer}><img alt={character.name} src={character.image}/></div>
-            <div className={styles.textContainer}>
+        <div className={style.mainDetailContainer}>
+            <div className={style.mainImageContainer}><img alt={character.name} src={character.image}/></div>
+            <div className={style.textContainer}>
             <h2><span>ID:</span> {character.id}</h2>
             <h2><span>NAME:</span> {character.name}</h2>
             <h2><span>ORIGIN:</span> {character.origin?.name}</h2>

@@ -1,8 +1,8 @@
-import { ADD_FAVOURITE } from "./action-types"
-import { DELETE_FAVOURITES } from "./action-types"
+import { ADD_FAVOURITE, FILTER, ORDER, DELETE_FAVOURITES } from "./action-types"
 
 const initialState = {
-    myFavorites: []
+    myFavorites: [],
+    allCharacters:[]
 }
 
 const reducer = (state = initialState, action)=> {
@@ -10,7 +10,8 @@ const reducer = (state = initialState, action)=> {
         case ADD_FAVOURITE:
             return{
                 ...state,
-                myFavorites: action.payload
+                myFavorites: action.payload,
+                allCharacters: action.payload
             }
 
         case DELETE_FAVOURITES:
@@ -19,10 +20,25 @@ const reducer = (state = initialState, action)=> {
                 myFavorites: action.payload
             }
 
+            case FILTER:
+                const allCharactersFiltered = state.allCharacters.filter((character) => character.gender === action.payload)
+                return{
+                    ...state,
+                    myFavorites: allCharactersFiltered
+                }
+
+           case ORDER:
+            const allCharactersCopy = [...state.allCharacters]
+            return{
+                ...state,
+                myFavorites: action.payload === 'A'
+                ? allCharactersCopy.sort((a,b)=> a.id - b.id)
+                : allCharactersCopy.sort((a,b)=> b.id - a.id)
+            }     
 
         default:
             return {...state}
     }
 }
 
-export default reducer
+export default reducer  
